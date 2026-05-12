@@ -1,3 +1,13 @@
-export default function LandingPage() {
-  return <div>Landing Page Component</div>;
+export default function LandingPage({
+  handleButtonClick,
+}: {
+  handleButtonClick: () => void;
+}) {
+  return (
+    <>
+      <button className="start-button" onClick={handleButtonClick}>
+        Start
+      </button>
+    </>
+  );
 }
