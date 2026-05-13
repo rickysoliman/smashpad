@@ -5,6 +5,7 @@ export default function LandingPage({
 }) {
   return (
     <>
+      <h1 className="title">Smash Pad</h1>
       <button className="start-button" onClick={handleButtonClick}>
         Start
       </button>

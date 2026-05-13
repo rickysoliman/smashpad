@@ -36,6 +36,11 @@ body {
   min-height: 100vh;
 }
 
+.title {
+  color: white;
+  font-size: 7rem;
+}
+
 button {
   background-color: #77ef77;
   padding: 1rem;
