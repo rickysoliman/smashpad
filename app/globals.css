@@ -49,7 +49,27 @@ button {
   }
 }
 
-.most-recent-key {
-  color: white;
+@keyframes floatAndFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1.5);
+  }
+}
+
+.floating-symbol {
+  position: absolute;
   font-size: 7rem;
+  font-family: monospace;
+  font-weight: bold;
+  color: white;
+  pointer-events: none;
+  user-select: none;
+  animation: floatAndFade 2s ease-out forwards;
 }

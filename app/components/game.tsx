@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
 
+interface ActiveSymbol {
+  id: string;
+  char: string;
+  x: number;
+  y: number;
+}
+
 export default function Game() {
-  const [displaySymbol, setDisplaySymbol] = useState("");
+  const [activeSymbols, setActiveSymbols] = useState<ActiveSymbol[]>([]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === " ") e.preventDefault();
+
       getDisplaySymbol(e.key);
     };
 
@@ -465,17 +474,47 @@ export default function Game() {
 
   const getDisplaySymbol = (key: string) => {
     const regex = /^[A-Za-z0-9]$/;
-
     const displaySymbol = regex.test(key)
       ? key.toUpperCase()
       : getRandomEmoji();
 
-    setDisplaySymbol(displaySymbol);
+    // 1. Generate random coordinates
+    // We subtract 100 to ensure the symbol doesn't render off the bottom/right edges
+    const randomX = Math.random() * (window.innerWidth - 100);
+    const randomY = Math.random() * (window.innerHeight - 100);
+
+    // 2. Create a unique ID for this specific key press
+    const uniqueId = crypto.randomUUID();
+
+    // 3. Add the new symbol to the screen
+    setActiveSymbols((prevSymbols) => [
+      ...prevSymbols,
+      { id: uniqueId, char: displaySymbol, x: randomX, y: randomY },
+    ]);
+
+    // 4. Set a timer to remove THIS specific symbol after 2 seconds
+    setTimeout(() => {
+      setActiveSymbols((currentSymbols) =>
+        currentSymbols.filter((sym) => sym.id !== uniqueId)
+      );
+    }, 2100);
   };
 
   return (
     <>
-      {displaySymbol && <div className="most-recent-key">{displaySymbol}</div>}
+      {activeSymbols.map((sym) => (
+        <div
+          key={sym.id}
+          className="floating-symbol"
+          style={{
+            position: "absolute",
+            left: `${sym.x}px`,
+            top: `${sym.y}px`,
+          }}
+        >
+          {sym.char}
+        </div>
+      ))}
     </>
   );
 }
