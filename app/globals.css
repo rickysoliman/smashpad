@@ -41,6 +41,11 @@ body {
   font-size: 7rem;
 }
 
+h3 {
+  color: white;
+  font-size: 2rem;
+}
+
 button {
   background-color: #77ef77;
   padding: 1rem;
@@ -52,6 +57,35 @@ button {
   &:hover {
     cursor: pointer;
   }
+}
+
+.theme-select-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+.theme-buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-button {
+  height: 100%;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.theme-button-icon {
+  border-radius: 50%;
+  height: 5rem;
 }
 
 @keyframes floatAndFade {
