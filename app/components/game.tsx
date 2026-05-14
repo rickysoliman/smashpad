@@ -9,10 +9,13 @@ interface ActiveSymbol {
 
 export default function Game() {
   const [activeSymbols, setActiveSymbols] = useState<ActiveSymbol[]>([]);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === " ") e.preventDefault();
+
+      setCount((prevCount) => prevCount + 1);
 
       getDisplaySymbol(e.key);
     };
@@ -502,6 +505,7 @@ export default function Game() {
 
   return (
     <>
+      <p className="keys-count">Keys Smashed: {count}</p>
       {activeSymbols.map((sym) => (
         <div
           key={sym.id}
