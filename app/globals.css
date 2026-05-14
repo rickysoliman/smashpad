@@ -20,13 +20,11 @@
 }
 
 body {
-  background-image: url("../public/space.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0;
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
@@ -37,12 +35,10 @@ body {
 }
 
 .title {
-  color: white;
   font-size: 7rem;
 }
 
 h3 {
-  color: white;
   font-size: 2rem;
 }
 
