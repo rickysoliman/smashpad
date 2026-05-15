@@ -155,7 +155,8 @@ button {
 .floating-symbol {
   position: absolute;
   font-size: 7rem;
-  font-family: "Cherry Bomb One";
+  font-family: "Arial";
+  font-weight: "bold";
   color: white;
   pointer-events: none;
   user-select: none;
