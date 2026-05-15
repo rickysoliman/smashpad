@@ -73,7 +73,7 @@ export default function LandingPage({
 
   return (
     <>
-      <h1 className="title">Smash Pad</h1>
+      <h1 className="title">SmashPad</h1>
       <p className="subtitle">Smash, explore, and discover!</p>
 
       <div className="theme-select-wrapper">
