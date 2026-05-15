@@ -74,8 +74,10 @@ export default function LandingPage({
   return (
     <>
       <h1 className="title">Smash Pad</h1>
+      <p className="subtitle">Smash, explore, and discover!</p>
+
       <div className="theme-select-wrapper">
-        <h3 className="theme-select-title">Select Theme</h3>
+        <h3 className="lined-title">CHOOSE A THEME</h3>
         <div className="theme-buttons-wrapper">
           {themes.map((theme, i) => (
             <button
