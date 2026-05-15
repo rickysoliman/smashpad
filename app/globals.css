@@ -43,15 +43,20 @@ h3 {
 }
 
 button {
-  background-color: #77ef77;
-  padding: 1rem;
+  background-color: var(--btn-bg);
+  border: 0.5rem solid var(--btn-border);
+  color: var(--btn-text);
+  padding: 1rem 3rem;
   font-size: 2rem;
   font-family: monospace;
-  border: 0.5rem solid #12bc4b;
+  font-weight: bold;
   border-radius: 3rem;
+  transition: transform 0.2s ease, filter 0.2s ease;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.05);
+    filter: brightness(1.2);
   }
 }
 
@@ -77,11 +82,22 @@ button {
   justify-content: center;
   align-items: center;
   margin: 1rem;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-button:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+.theme-button.selected {
+  transform: scale(1.15);
+  box-shadow: 0 0 25px currentColor;
 }
 
 .theme-button-icon {
   border-radius: 50%;
-  height: 5rem;
+  width: 5rem;
 }
 
 @keyframes floatAndFade {

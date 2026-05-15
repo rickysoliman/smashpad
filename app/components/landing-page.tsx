@@ -10,8 +10,23 @@ export default function LandingPage({
   useEffect(() => {
     const activeTheme = themes[activeThemeIndex];
 
+    // 1. Set the background image and text color on the body
     document.body.style.backgroundImage = `url('${activeTheme.background}')`;
-    document.body.style.color = `${activeTheme.borderColor}`;
+    document.body.style.color = activeTheme.borderColor; // <-- ADDED THIS LINE
+
+    // 2. Dynamically update the global CSS variables for all buttons
+    document.documentElement.style.setProperty(
+      "--btn-bg",
+      activeTheme.backgroundColor
+    );
+    document.documentElement.style.setProperty(
+      "--btn-border",
+      activeTheme.borderColor
+    );
+    document.documentElement.style.setProperty(
+      "--btn-text",
+      activeTheme.borderColor
+    );
   }, [activeThemeIndex]);
 
   const themes = [
@@ -41,7 +56,7 @@ export default function LandingPage({
       icon: "/sea-icon.png",
       background: "/sea.jpg",
       backgroundColor: "#26a8c3",
-      borderColor: "##6BEAFF",
+      borderColor: "#6beaff",
     },
     {
       name: "castle",
@@ -65,12 +80,15 @@ export default function LandingPage({
           {themes.map((theme, i) => (
             <button
               key={theme.name}
-              className="theme-button"
+              // Conditionally add the "selected" class
+              className={`theme-button ${
+                i === activeThemeIndex ? "selected" : ""
+              }`}
               onClick={() => handleThemeButtonClick(i)}
               style={{
                 backgroundColor: theme.backgroundColor,
                 borderColor: theme.borderColor,
-                color: theme.borderColor,
+                color: theme.borderColor, // We will use this color for the glow effect!
                 borderWidth: "4px",
                 borderStyle: "solid",
               }}
