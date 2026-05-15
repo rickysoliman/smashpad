@@ -1,34 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function LandingPage({
   handleButtonClick,
+  activeThemeIndex,
+  setActiveThemeIndex,
 }: {
   handleButtonClick: () => void;
+  activeThemeIndex: number;
+  setActiveThemeIndex: (index: number) => void;
 }) {
-  const [activeThemeIndex, setActiveThemeIndex] = useState(0);
-
-  useEffect(() => {
-    const activeTheme = themes[activeThemeIndex];
-
-    // 1. Set the background image and text color on the body
-    document.body.style.backgroundImage = `url('${activeTheme.background}')`;
-    document.body.style.color = activeTheme.borderColor; // <-- ADDED THIS LINE
-
-    // 2. Dynamically update the global CSS variables for all buttons
-    document.documentElement.style.setProperty(
-      "--btn-bg",
-      activeTheme.backgroundColor
-    );
-    document.documentElement.style.setProperty(
-      "--btn-border",
-      activeTheme.borderColor
-    );
-    document.documentElement.style.setProperty(
-      "--btn-text",
-      activeTheme.borderColor
-    );
-  }, [activeThemeIndex]);
-
   const themes = [
     {
       name: "space",
@@ -66,6 +46,26 @@ export default function LandingPage({
       borderColor: "#e1ad2c",
     },
   ];
+
+  useEffect(() => {
+    const activeTheme = themes[activeThemeIndex];
+
+    document.body.style.backgroundImage = `url('${activeTheme.background}')`;
+    document.body.style.color = activeTheme.borderColor;
+
+    document.documentElement.style.setProperty(
+      "--btn-bg",
+      activeTheme.backgroundColor
+    );
+    document.documentElement.style.setProperty(
+      "--btn-border",
+      activeTheme.borderColor
+    );
+    document.documentElement.style.setProperty(
+      "--btn-text",
+      activeTheme.borderColor
+    );
+  }, [activeThemeIndex]);
 
   const handleThemeButtonClick = (themeIndex: number) => {
     setActiveThemeIndex(themeIndex);

@@ -6,6 +6,7 @@ import Game from "./components/game";
 
 export default function Home() {
   const [gameStarted, setGameStarted] = useState(false);
+  const [activeThemeIndex, setActiveThemeIndex] = useState(0);
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
@@ -19,7 +20,11 @@ export default function Home() {
     <Game />
   ) : (
     <>
-      <LandingPage handleButtonClick={() => setGameStarted(true)} />
+      <LandingPage
+        handleButtonClick={() => setGameStarted(true)}
+        activeThemeIndex={activeThemeIndex}
+        setActiveThemeIndex={setActiveThemeIndex}
+      />
     </>
   );
 }
