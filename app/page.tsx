@@ -17,7 +17,7 @@ export default function Home() {
   }, []);
 
   return gameStarted ? (
-    <Game />
+    <Game activeThemeIndex={activeThemeIndex} />
   ) : (
     <>
       <LandingPage
