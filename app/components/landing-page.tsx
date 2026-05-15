@@ -33,35 +33,35 @@ export default function LandingPage({
     {
       name: "space",
       icon: "/space-icon.png",
-      background: "/space.jpg",
+      background: "/space-background.png",
       backgroundColor: "#2b2266",
       borderColor: "#ffffff",
     },
     {
       name: "jungle",
       icon: "/jungle-icon.png",
-      background: "/jungle.jpg",
+      background: "/jungle-background.png",
       backgroundColor: "#297b2b",
       borderColor: "#95d535",
     },
     {
       name: "city",
       icon: "/city-icon.png",
-      background: "/city.jpg",
+      background: "/city-background.png",
       backgroundColor: "#627382",
       borderColor: "#f68d1e",
     },
     {
       name: "sea",
       icon: "/sea-icon.png",
-      background: "/sea.jpg",
+      background: "/sea-background.png",
       backgroundColor: "#26a8c3",
       borderColor: "#6beaff",
     },
     {
       name: "castle",
       icon: "/castle-icon.png",
-      background: "/castle.jpg",
+      background: "/castle-background.png",
       backgroundColor: "#645087",
       borderColor: "#e1ad2c",
     },
@@ -80,7 +80,6 @@ export default function LandingPage({
           {themes.map((theme, i) => (
             <button
               key={theme.name}
-              // Conditionally add the "selected" class
               className={`theme-button ${
                 i === activeThemeIndex ? "selected" : ""
               }`}
@@ -88,7 +87,7 @@ export default function LandingPage({
               style={{
                 backgroundColor: theme.backgroundColor,
                 borderColor: theme.borderColor,
-                color: theme.borderColor, // We will use this color for the glow effect!
+                color: theme.borderColor,
                 borderWidth: "4px",
                 borderStyle: "solid",
               }}
