@@ -73,7 +73,9 @@ export default function Game({
 
   return (
     <>
-      <p className="keys-count">Keys Smashed: {count}</p>
+      <div className="keys-count-wrapper">
+        <p className="keys-count">Keys Smashed: {count}</p>
+      </div>
       {activeSymbols.map((sym) => (
         <div
           key={sym.id}
