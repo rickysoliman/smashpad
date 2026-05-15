@@ -177,11 +177,11 @@ button {
   top: 0;
   right: 0;
   box-shadow: 0 4px 10px #00000080;
-  width: 20rem;
+  width: 300px;
   display: flex;
   justify-content: center;
 }
 
 .keys-count {
-  width: 200px;
+  width: 300px;
 }
