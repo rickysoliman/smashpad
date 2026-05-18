@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface ActiveSymbol {
   id: string;
@@ -26,17 +26,21 @@ export default function Game({
   const themeKeys = ["space", "jungle", "city", "sea", "castle"] as const;
   const currentTheme = themeKeys[activeThemeIndex];
   const currentEmojiList = themeEmojis[currentTheme];
+  const audioCtxRef = useRef<AudioContext | null>(null);
 
   // Create the AudioContext outside the effect so it persists
   // (We use a ref or state if needed, but a simple module-level or lazy init works best for browsers)
 
   const playRandomNote = () => {
-    // Standardize the AudioContext for cross-browser compatibility
-    const AudioContext =
-      window.AudioContext || (window as any).webkitAudioContext;
-    const audioCtx = new AudioContext();
+    if (!audioCtxRef.current) {
+      const AudioContext =
+        window.AudioContext || (window as any).webkitAudioContext;
+      audioCtxRef.current = new AudioContext();
+    }
 
-    // Exact frequencies for C Major Scale (C3 to C4)
+    // Grab the shared engine
+    const audioCtx = audioCtxRef.current;
+
     const frequencies = [
       261.63, // C4
       293.66, // D4
@@ -53,35 +57,27 @@ export default function Game({
 
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
-    // A BiquadFilter helps mimic the acoustic properties of a physical instrument
     const filter = audioCtx.createBiquadFilter();
 
-    // Triangle waves have more "body" and sound much more like a piano/keyboard
     oscillator.type = "triangle";
     oscillator.frequency.value = randomFreq;
 
-    // Filter Envelope: Mimics the bright "smack" of a hammer hitting a string
     filter.type = "lowpass";
-    filter.frequency.setValueAtTime(randomFreq * 4, audioCtx.currentTime); // Starts bright
+    filter.frequency.setValueAtTime(randomFreq * 4, audioCtx.currentTime);
     filter.frequency.exponentialRampToValueAtTime(
       randomFreq,
       audioCtx.currentTime + 0.3
-    ); // Quickly mellows out
+    );
 
-    // Wire it up: Oscillator -> Filter -> Gain (Volume) -> Speakers
     oscillator.connect(filter);
     filter.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 
-    // Volume Envelope: The exact shape of a piano note's volume over time
     const now = audioCtx.currentTime;
     gainNode.gain.setValueAtTime(0, now);
 
-    // Attack: Instant sharp strike
     gainNode.gain.linearRampToValueAtTime(1, now + 0.01);
-    // Decay: Initial loud impact fades quickly
     gainNode.gain.exponentialRampToValueAtTime(0.3, now + 0.2);
-    // Sustain & Release: The string rings out into silence
     gainNode.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
 
     oscillator.start(now);
